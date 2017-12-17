@@ -3,6 +3,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.login.LoginPage;
+import pages.main.MainPage;
 
 /**
  * Created by Asus on 25.11.2017.
@@ -21,16 +23,17 @@ public class LoginPageTest {
         loginPage.initDriver();
     }
     @Test
-    public void testIsSignedIn() throws Exception {
-        MainPage mainPage=loginPage.loginSuccess(EMAIL,PASSWORD);
+    public void loginTest() throws Exception {
+        loginPage.login(EMAIL,PASSWORD);
+        MainPage mainPage= new MainPage(driver);
         String singInName= mainPage.getUserName();
         Assert.assertEquals(EMAIL,singInName);
     }
 
     @Test
-    public void testFailedSignIn() throws Exception {
-        ErrorLoginPage errorLoginPage=loginPage.loginFailed(EMAIL,WRONG_PASSWORD);
-        Assert.assertTrue(errorLoginPage.massageAreDisplayed());
+    public void invalidLoginTest() throws Exception {
+        loginPage.login(EMAIL,WRONG_PASSWORD);
+        loginPage.massageIsDisplayed();
     }
     @AfterMethod
     public void stopBrowser() {

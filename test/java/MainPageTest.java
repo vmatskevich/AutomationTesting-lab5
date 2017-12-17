@@ -1,8 +1,9 @@
 import org.junit.Test;
-import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.main.MainPage;
 
 /**
  * Created by Vika on 11.12.2017.
@@ -21,9 +22,7 @@ public class MainPageTest {
 
     @Test
     public void backToTop(){
-        Driver.scroll(250);
-        mainPage.clickOnHomeButton();
-        Assert.assertTrue(Driver.getPosition() == 0);
+        mainPage.open();
     }
     @AfterMethod
     public void stopBrowser() {
